@@ -10,7 +10,7 @@ class PostController extends \BaseController {
 	public function index()
 	{
 		$data = [
-			'posts'			=> Post::orderBy('created_at', 'desc')->paginate(2),
+			'posts'			=> Post::orderBy('created_at', 'desc')->paginate(10),
 			'locale'		=> App::getLocale()
 		];
 		return View::make('blog', $data);
