@@ -25,9 +25,8 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(array(
-
-	'local' => array('your-machine-name'),
-
+	'production' => array('li268-189'),
+	'local' => array('ciutadella*','Marcs*','mcamara*')
 ));
 
 /*
