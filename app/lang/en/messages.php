@@ -43,7 +43,7 @@ return array(
 	'about'				=> 'About',
 	'about_me'			=> 'About me',
 
-	'about_me_text'		=> '<p>Hi! My name is Marc Cámara and I am a software developer born in Barcelona. While studying Computer Science and getting a Masters Degree in Information Technologies at the <a href="http://www.upc.edu" target="_blank">Universitat Polit&egrave;cnica de Catalunya</a> and an exchange time at the <a href="http://http://www.northeastern.edu/" target="_blank">Northeastern University of Boston</a>, I started my professional career in some startups and freelance projects, all based in Barcelona.</p>
+	'about_me_text'		=> '<p>Hi! My name is Marc Cámara and I am a software developer born in Barcelona. While studying Computer Science and getting a Masters Degree in Information Technologies at the <a href="http://www.upc.edu" target="_blank">Universitat Polit&egrave;cnica de Catalunya</a> and an exchange time at the <a href="http://www.northeastern.edu/" target="_blank">Northeastern University of Boston</a>, I started my professional career in some startups and freelance projects, all based in Barcelona.</p>
 
 		<p>Entrepreneur as a way of life, I am always looking for new tech while thinking about how to use them in my current or future projects. I feel comfortable with open source code and I collaborate freely in code communities (for further references, please check my GitHub repository).</p>
 

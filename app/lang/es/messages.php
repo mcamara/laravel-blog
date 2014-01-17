@@ -44,7 +44,7 @@ return array(
 	'about'				=> 'Acerca',
 	'about_me'			=> '¿Quien soy?',
 
-	'about_me_text'		=> '<p>Bienvenido! Mi nombre es Marc Cámara y soy un desarrollador de aplicaciones nacido en Barcelona. Durante mis estudios de Ingenier&iacute;a Inform&aacute;tica y m&aacute;ster en Tecnolog&iacute;as de la Informaci&oacute;n en la <a href="http://www.upc.edu" target="_blank">Universitat Polit&egrave;cnica de Catalunya</a> y un intercambio en la <a href="http://http://www.northeastern.edu/" target="_blank">Northeastern University of Boston</a>, empec&eacute; mi carrera profesional en algunas startups y con proyectos propios, todos establecidos en Barcelona.</p>
+	'about_me_text'		=> '<p>Bienvenido! Mi nombre es Marc Cámara y soy un desarrollador de aplicaciones nacido en Barcelona. Durante mis estudios de Ingenier&iacute;a Inform&aacute;tica y m&aacute;ster en Tecnolog&iacute;as de la Informaci&oacute;n en la <a href="http://www.upc.edu" target="_blank">Universitat Polit&egrave;cnica de Catalunya</a> y un intercambio en la <a href="http://www.northeastern.edu/" target="_blank">Northeastern University of Boston</a>, empec&eacute; mi carrera profesional en algunas startups y con proyectos propios, todos establecidos en Barcelona.</p>
 
 		<p>Emprendedor por naturaleza, siempre estoy navegando por la red buscando nuevas tecnolog&iacute;as y pensando en como usarlas para futuros proyectos. Defensor del c&oacute;digo abierto, he colaborado o reportado problemas en algunos proyectos (para m&aacute;s referencias, consultar mi repositorio en Github).
 
