@@ -66,7 +66,7 @@
 						</div>
 						<div class="row change-language">
 							<div class="col-xs-12">
-								{{ LaravelLocalization::getLanguageBar(false) }}
+							{{ LaravelLocalization::getLanguageBar() }}
 							</div>
 						</div>
 					</div>
