@@ -6,6 +6,7 @@ body #blog_body #left_bar .post-container .single-post:first-child{border-top:0}
 body #blog_body #left_bar .post-container .single-post .post-image{text-align:center;margin:0 auto;max-height:610px}
 body #blog_body #left_bar .post-container .single-post .post-content .not-languaged{font-weight:bold;font-style:italic;margin-bottom:10px}
 body #blog_body #left_bar .post-container .single-post .post-content .read-more{text-align:right}body #blog_body #left_bar .post-container .single-post .post-content .read-more a{font-size:16px;color:#fff}
+body #blog_body #left_bar .post-container .single-post .post-content .social-buttons .twitter-share-button,body #blog_body #left_bar .post-container .single-post .post-content .social-buttons .IN-widget{width:80px !important;margin-bottom:-6px}
 body #blog_body #left_bar .post-container h2{line-height:35px;margin:10px 0 30px 0}
 body #blog_body #left_bar .post-container .stats,body #blog_body #left_bar .post-container .other-info,body #blog_body #left_bar .post-container .links{padding:10px;border-bottom:1px dashed rgba(0,0,0,0.2)}body #blog_body #left_bar .post-container .stats span,body #blog_body #left_bar .post-container .other-info span,body #blog_body #left_bar .post-container .links span{font-weight:bold}
 @media (max-width:768px){body #blog_body #left_bar .post-container .stats{font-size:14px}}body #blog_body #left_bar .post-container .stats .views{text-align:right}
