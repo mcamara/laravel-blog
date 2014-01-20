@@ -3,7 +3,7 @@ body{font-family:'Alegreya Sans',sans-serif;font-weight:400;font-size:16px;backg
 body #blog_body a{color:inherit}body #blog_body a:hover{-webkit-transition:color .6s ease-out;-moz-transition:color .6s ease-out;-ms-transition:color .6s ease-out;-o-transition:color .6s ease-out;transition:color .6s ease-out;color:#2c77ac}
 body #blog_body #left_bar{z-index:1;background:#f2f2f2;-webkit-box-shadow:0 0 20px rgba(0,0,0,0.2);-moz-box-shadow:0 0 20px rgba(0,0,0,0.2);box-shadow:0 0 20px rgba(0,0,0,0.2);-webkit-border-radius:3px;padding:0}body #blog_body #left_bar .post-container{width:100%}body #blog_body #left_bar .post-container .single-post{border-top:1px dashed rgba(0,0,0,0.2);margin-bottom:35px}@media (max-width:768px){body #blog_body #left_bar .post-container .single-post .post-title{font-size:20px;line-height:25px}}
 body #blog_body #left_bar .post-container .single-post:first-child{border-top:0}
-body #blog_body #left_bar .post-container .single-post .post-image{text-align:center;margin:0 auto}
+body #blog_body #left_bar .post-container .single-post .post-image{text-align:center;margin:0 auto;max-height:610px}
 body #blog_body #left_bar .post-container .single-post .post-content .not-languaged{font-weight:bold;font-style:italic;margin-bottom:10px}
 body #blog_body #left_bar .post-container .single-post .post-content .read-more{text-align:right}body #blog_body #left_bar .post-container .single-post .post-content .read-more a{font-size:16px;color:#fff}
 body #blog_body #left_bar .post-container h2{line-height:35px;margin:10px 0 30px 0}
@@ -28,6 +28,18 @@ body #blog_body #left_bar .error-container h4{margin-bottom:20px}
 body #blog_body #left_bar .error-container .image-404{text-align:center;margin:100px auto 10px auto}body #blog_body #left_bar .error-container .image-404 img{width:60%;max-width:160px}
 @media (max-width:992px){body #blog_body #left_bar .error-container .image-404{margin:20px auto 10px auto}}
 body #blog_body #left_bar .error-container .text-404{text-align:center;margin:0 auto 60px auto}@media (max-width:992px){body #blog_body #left_bar .error-container .text-404{margin:0 auto 20px auto}}
+body #blog_body #left_bar .login-container .form-signin{max-width:330px;padding:15px;margin:20px auto}
+body #blog_body #left_bar .login-container .form-signin .form-signin-heading,body #blog_body #left_bar .login-container .form-signin .checkbox{margin-bottom:10px}
+body #blog_body #left_bar .login-container .form-signin .checkbox{font-weight:normal}
+body #blog_body #left_bar .login-container .form-signin .form-control{position:relative;font-size:16px;height:auto;padding:10px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+body #blog_body #left_bar .login-container .form-signin .form-control:focus{z-index:2}
+body #blog_body #left_bar .login-container .form-signin input[type="text"]{margin-bottom:-1px;border-bottom-left-radius:0;border-bottom-right-radius:0}
+body #blog_body #left_bar .login-container .form-signin input[type="password"]{margin-bottom:10px;border-top-left-radius:0;border-top-right-radius:0}
+body #blog_body #left_bar .login-container .account-wall{margin-top:40px;margin-bottom:50px;padding:40px 0 20px 0;background-color:#f7f7f7;-moz-box-shadow:0 2px 2px rgba(0,0,0,0.3);-webkit-box-shadow:0 2px 2px rgba(0,0,0,0.3);box-shadow:0 2px 2px rgba(0,0,0,0.3)}
+body #blog_body #left_bar .login-container .login-title{color:#555;font-size:18px;font-weight:400;display:block}
+body #blog_body #left_bar .login-container .profile-img{width:96px;height:96px;margin:0 auto 10px;display:block;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%}
+body #blog_body #left_bar .login-container .need-help{margin-top:10px}
+body #blog_body #left_bar .login-container .new-account{display:block;margin-top:10px}
 body #blog_body #right_bar .right-bar-container{z-index:2}body #blog_body #right_bar .right-bar-container a:hover{cursor:pointer}
 body #blog_body #right_bar .right-bar-container h1{font-size:55px;line-height:50px;text-decoration:bold;font-family:'Alegreya Sans',sans-serif;font-weight:700;color:rgba(0,0,0,0.6);margin-bottom:0}
 body #blog_body #right_bar .right-bar-container h2{margin-top:10px;margin-bottom:0;font-size:20px;text-decoration:bold;font-family:'Alegreya Sans',sans-serif;font-weight:700;color:rgba(0,0,0,0.6)}

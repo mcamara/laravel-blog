@@ -10,7 +10,7 @@
 		 * @var array
 		 */
 		public static $validation = array(
-			"image"		=> 'image|Mimes:jpg,gif,bmp,png|max:15360',
+			"image"		=> 'image|Mimes:jpg,gif,bmp,png,jpeg|max:15360',
 		);
 
 	    public function author()
