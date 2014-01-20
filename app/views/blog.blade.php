@@ -18,7 +18,7 @@
 		$(function() {
 		  	$.ajax({
 			    type: 'GET',
-			    url: "https://disqus.com/api/3.0/threads/set.jsonp",
+			    url: "http://disqus.com/api/3.0/threads/set.jsonp",
 			    data: { api_key: disqusPublicKey, forum : disqus_shortname, thread : identifierArray },
 			    cache: false,
 			    dataType: 'jsonp',

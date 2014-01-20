@@ -34,7 +34,7 @@
 								<div class="fb-share-button" data-href="{{Request::url()}}" data-type="button_count"></div>
 								<a href="https://twitter.com/share" class="twitter-share-button" 
 									data-lang="{{Config::get('app.locale')}}" 
-									data-text="{{(strlen($post->title) > 123) ? substr($post->title,0,120).'...' : $post->title}}">
+									data-text="{{(strlen($post->title) > 123) ? substr($post->title,0,120).'...' : $post->title}} - Marc Cámara Website">
 										Tweet
 								</a>
 								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

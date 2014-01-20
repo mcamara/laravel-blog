@@ -25,6 +25,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'colors' },
 		{ name: 'about' }
 	];
+	
+	config.extraPlugins = 'oembed';
 
 	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.
