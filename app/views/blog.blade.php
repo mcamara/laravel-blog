@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 		var disqus_shortname = 'marccamara'; // required: replace example with your forum shortname
-		var disqusPublicKey = "ggV8HawSyPuTW1cP6fqP1VM0DYdiYPu1wLuGhlijcyjY4NxEVmWhDpMvWLwvASeQ";
+		var disqusPublicKey = "FWASTOKPQ12oEICYQVB6NUC5ZqIZ3ua9A7kzOZpwXkn5jHTSzkw40qzBlCbHlxZL";
 		var identifierArray = [];
 		$('.count-comments').each(function () {
 		  	var identifier = $(this).attr('data-disqus-identifier');
