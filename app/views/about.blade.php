@@ -18,7 +18,9 @@
 				<h2>@lang('messages.about_me')</h2>
 			</div>
 		</div>
-		<img src="{{url('images/about.jpg')}}" class="img-responsive about-image" alt="About">
+		<div class="image-about-container col-xs-12">
+			<img src="{{url('images/about.jpg')}}" class="img-responsive about-image" alt="About">
+		</div>
 		<div class="container about-text">
 			<div class="col-xs-12">
 				@lang('messages.about_me_text')

@@ -20,7 +20,7 @@ body #blog_body #left_bar .project-container .project .description .technologies
 body #blog_body #left_bar .project-container .project .description .technologies img{margin:15px 5%;height:60px}@media (max-width:768px){body #blog_body #left_bar .project-container .project .description .technologies img{height:50px}}
 body #blog_body #left_bar .project-container .more_projects{text-align:center;font-size:18px;font-weight:bold;margin-bottom:20px}body #blog_body #left_bar .project-container .more_projects a{text-decoration:underline}
 body #blog_body #left_bar .about-container a{text-decoration:underline}
-body #blog_body #left_bar .about-container .about-image{margin-top:10px;border-top:1px dashed rgba(0,0,0,0.2);border-bottom:1px dashed rgba(0,0,0,0.2)}
+body #blog_body #left_bar .about-container .image-about-container{border-top:1px dashed rgba(0,0,0,0.2);border-bottom:1px dashed rgba(0,0,0,0.2);margin-top:10px}body #blog_body #left_bar .about-container .image-about-container .about-image{max-height:550px;margin:0 auto}
 body #blog_body #left_bar .about-container .about-text{margin-top:20px;margin-bottom:20px}
 body #blog_body #left_bar .about-container .resume img{height:60px}
 body #blog_body #left_bar .paginator-container{text-align:right}
