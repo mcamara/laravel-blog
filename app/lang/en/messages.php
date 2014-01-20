@@ -60,6 +60,11 @@ return array(
 
 	'sections'			=> 'Sections',
 	'done_with_laravel'	=> 'Page built on Laravel',
-	'page_in_github'	=> 'Source code of the page in github '	
+	'page_in_github'	=> 'Source code of the page in github ',
+
+	'page_not_found'	=> "Page not found",
+	'404'				=> '404 error :(',
+	'crab_404_1'		=> 'This bionic crab is looking for the page your are looking for...',
+	'crab_404_2'		=> 'but it is unable to find it. Check again the url and reload the page.'
 	
 );

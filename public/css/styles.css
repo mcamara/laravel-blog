@@ -23,6 +23,11 @@ body #blog_body #left_bar .about-container .about-image{margin-top:10px;border-t
 body #blog_body #left_bar .about-container .about-text{margin-top:20px;margin-bottom:20px}
 body #blog_body #left_bar .about-container .resume img{height:60px}
 body #blog_body #left_bar .paginator-container{text-align:right}
+@media (min-width:992px){body #blog_body #left_bar .error-container{min-height:600px}}body #blog_body #left_bar .error-container h3{margin-bottom:30px}
+body #blog_body #left_bar .error-container h4{margin-bottom:20px}
+body #blog_body #left_bar .error-container .image-404{text-align:center;margin:100px auto 10px auto}body #blog_body #left_bar .error-container .image-404 img{width:60%;max-width:160px}
+@media (max-width:992px){body #blog_body #left_bar .error-container .image-404{margin:20px auto 10px auto}}
+body #blog_body #left_bar .error-container .text-404{text-align:center;margin:0 auto 60px auto}@media (max-width:992px){body #blog_body #left_bar .error-container .text-404{margin:0 auto 20px auto}}
 body #blog_body #right_bar .right-bar-container{z-index:2}body #blog_body #right_bar .right-bar-container a:hover{cursor:pointer}
 body #blog_body #right_bar .right-bar-container h1{font-size:55px;line-height:50px;text-decoration:bold;font-family:'Alegreya Sans',sans-serif;font-weight:700;color:rgba(0,0,0,0.6);margin-bottom:0}
 body #blog_body #right_bar .right-bar-container h2{margin-top:10px;margin-bottom:0;font-size:20px;text-decoration:bold;font-family:'Alegreya Sans',sans-serif;font-weight:700;color:rgba(0,0,0,0.6)}
