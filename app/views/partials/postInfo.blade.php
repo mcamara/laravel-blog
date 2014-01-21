@@ -49,8 +49,13 @@
 				@if(count($post->categories) == 0)
 					@lang('messages.post_no_categorized')
 				@else
+					<?php $i = 1 ?>
 					@foreach($post->categories as $category)
-						{{$category->name}} 
+						{{$category->name}}
+						<?php $i++ ?>
+						@if(count($post->categories) != $i)
+							,
+						@endif
 					@endforeach
 				@endif
 			</span>
