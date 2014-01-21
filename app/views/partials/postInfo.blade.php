@@ -52,10 +52,10 @@
 					<?php $i = 1 ?>
 					@foreach($post->categories as $category)
 						{{$category->name}}
-						<?php $i++ ?>
 						@if(count($post->categories) != $i)
 							,
 						@endif
+						<?php $i++ ?>
 					@endforeach
 				@endif
 			</span>
