@@ -50,7 +50,7 @@
 					@lang('messages.post_no_categorized')
 				@else
 					@foreach($post->categories as $category)
-						{{$category->name}}
+						{{$category->name}} 
 					@endforeach
 				@endif
 			</span>
