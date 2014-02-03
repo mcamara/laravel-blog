@@ -31,7 +31,13 @@
 	</div>
 </div>
 @if(!empty($post->image))
+	@if($linkable)
+		<a href="{{route('viewPost',['slug'=>$post->slug])}}">
+	@endif
 	<img src="{{url($post->image)}}" class="img-responsive post-image" alt="Post image">
+	@if($linkable)
+		</a>
+	@endif
 @endif
 <div class="container other-info">
 	<div class="row">

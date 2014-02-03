@@ -6,7 +6,7 @@
 		<link rel="shortcut icon" href="{{url('favicon.ico')}}" type="image/ico">
 		<meta name="title" content="Marc Camara - Software developer" /> 
 		<meta name="description" content="Marc Camara - Software Developer" /> 
-		<meta name="keywords" content="@foreach($categories as $cat){{$cat->name_en}}, @endforeach" /> 
+		<meta name="keywords" content="Marc Camara, Website Development, Software Developer, @foreach($categories as $cat){{$cat->name_en}}, @endforeach" /> 
 		<meta property="og:title" content="Marc Camara - Software developer"/> 
 		<meta property="og:type" content="company"/> 
 		<meta property="og:site_name" content="Marc Camara - Software developer"/> 
