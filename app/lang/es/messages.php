@@ -66,6 +66,8 @@ return array(
 	'page_not_found'	=> "P&aacute;gina no encontrada",
 	'404'				=> 'Error 404 :(',
 	'crab_404_1'		=> 'Este cangrejo bi&oacute;nico est&aacute; buscando la p&aacute;gina que quer&iacute;as...',
-	'crab_404_2'		=> 'pero es incapaz de encontrarla, revisa la url y recarga.'
+	'crab_404_2'		=> 'pero es incapaz de encontrarla, revisa la url y recarga.',
+
+	'adverts'			=> "Publicidad"
 	
 );
