@@ -70,7 +70,7 @@
 	<div class="container paginator-container">
 		{{$posts->links()}}
 	</div>
-	<div class="container adverts">
+	<div class="container pub">
 		<div class="row">
 			<div class="col-xs-12 ">
 				<h4>@lang('messages.adverts')</h4>
