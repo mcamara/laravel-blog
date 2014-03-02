@@ -5,6 +5,14 @@
 	    protected $table = "posts";
 	    protected $softDelete = true;
 
+	    private $current_locale;
+
+	    public function __construct()
+	    {
+	    	parent::__construct();
+	    	$this->current_locale = App::getLocale();
+	    }
+
 		/**
 		 * The attributes to validate when a post is created
 		 * @var array
@@ -28,32 +36,33 @@
 
 	    public function getTitleAttribute()
 	    {
-	        $locale = App::getLocale();
-	        if(!in_array($locale, $this->translations))
+	    	// $this->translations have always one element at least
+	        if(in_array($this->current_locale, $this->translations))
 	        {
-	        	$locale = $this->translations[0];
+	        	return $this->{"title_" . $this->current_locale};
 	        }
-	        return $this->{"title_" . $locale};
+	        return $this->{"title_" . $this->translations[0]};
 	    }
+
 	    public function getContentAttribute()
 	    {
-	        $locale = App::getLocale();
-	        if(!in_array($locale, $this->translations))
+	        if(in_array($this->current_locale, $this->translations))
 	        {
-	        	$locale = $this->translations[0];
+	        	return $this->{"content_" . $this->current_locale};
 	        }
-	        return $this->{"content_" . $locale};
+	        return $this->{"content_" . $this->translations[0]};
 
 	    }
+
 	    public function getExcerptAttribute()
 	    {
-	        $locale = App::getLocale();
-	        if(!in_array($locale, $this->translations))
+	        if(in_array($this->current_locale, $this->translations))
 	        {
-	        	$locale = $this->translations[0];
+	        	return $this->{"excerpt_" . $this->current_locale};
 	        }
-	        return $this->{"excerpt_" . $locale};
+	        return $this->{"excerpt_" . $this->translations[0]};
 	    }
+	    
 	    public function getTranslationsAttribute()
 	    {
 	        return json_decode($this->languages);

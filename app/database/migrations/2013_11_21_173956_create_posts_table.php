@@ -14,7 +14,7 @@ class CreatePostsTable extends Migration {
 	{
 		Schema::create('posts', function(Blueprint $table) {
 			$table->increments('id');
-			foreach (LaravelLocalization::getAllowedLanguages() as $lang) {
+			foreach (array_keys(LaravelLocalization::getSupportedLocales()) as $lang) {
 				$table->string('title_'.$lang)->nullable()->default(null);
 				$table->text('content_'.$lang)->nullable()->default(null);
 				$table->text('excerpt_'.$lang)->nullable()->default(null);
