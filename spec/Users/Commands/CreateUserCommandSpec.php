@@ -7,6 +7,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Blog\Users\UserRepository;
 use Blog\Users\User;
+use Laracasts\TestDummy\Factory;
 
 class CreateUserCommandSpec extends ObjectBehavior {
 
@@ -15,24 +16,20 @@ class CreateUserCommandSpec extends ObjectBehavior {
         $this->beConstructedWith($repository, $dispatcher);
     }
 
-    function it_is_initializable( UserRepository $repository )
+    function it_is_initializable()
     {
         $this->shouldHaveType('Blog\Users\Commands\CreateUserCommand');
+    }
 
-        $user = [
-            'first_name' => 'John',
-            'last_name'  => 'Appleseed',
-            'email'      => 'john.appleseed@example.com',
-            'is_admin'   => false
+    function it_creates_user_using_the_user_repository( UserRepository $repository )
+    {
+        $user = Factory::build('Blog\Users\User');
 
-        ];
-
-        $this->create($user);
+        $this->create($user->toArray());
 
         $repository
-            ->save(new User($user))
+            ->save(new User($user->toArray()))
             ->shouldBeCalled();
-
 
     }
 }
