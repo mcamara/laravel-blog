@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+require("gulp-notify");
 
 /*
  |--------------------------------------------------------------------------
