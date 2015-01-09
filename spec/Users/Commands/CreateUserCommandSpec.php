@@ -21,14 +21,14 @@ class CreateUserCommandSpec extends ObjectBehavior {
         $this->shouldHaveType('Blog\Users\Commands\CreateUserCommand');
     }
 
-    function it_creates_user_using_the_user_repository( UserRepository $repository )
+    function it_creates_user_using_the_user_repository( UserRepository $repository, User $user )
     {
         $user = Factory::build('Blog\Users\User');
 
         $this->create($user->toArray());
 
         $repository
-            ->save(new User($user->toArray()))
+            ->save($user)
             ->shouldBeCalled();
 
     }

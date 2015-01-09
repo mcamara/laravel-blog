@@ -16,7 +16,7 @@ elixir(function(mix) {
     mix
         .less('app.less')
         .version('public/css/app.css')
-        .phpSpec()
+        //.phpSpec()
         .phpUnit();
 
 });
