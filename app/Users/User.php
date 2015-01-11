@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = [ 'password', 'remember_token' ];
+    protected $hidden = [ 'password', 'remember_token', 'profile_picture' ];
 
     public function getFullNameAttribute()
     {
@@ -41,6 +41,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $hasher = new BcryptHasher();
         $this->attributes[ 'password' ] = $hasher->make($password);
+    }
+
+    public function setProfilePicture( $profile_picture )
+    {
+
     }
 
 }

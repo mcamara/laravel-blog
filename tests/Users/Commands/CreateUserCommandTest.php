@@ -8,6 +8,10 @@ use Laracasts\TestDummy\Factory;
 
 class CreateUserCommandTest extends TestCase {
 
+    protected $dispatcher;
+    protected $userRepository;
+    protected $command;
+
     public function setUp()
     {
         parent::setUp();

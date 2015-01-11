@@ -7,56 +7,133 @@ use Blog\Users\UserRepository;
 class UserRepositoryTest extends TestCase {
 
     /**
+     * @var Blog\Users\UserRepository
+     */
+    protected $userRepository;
+
+    /**
      * Default preparation for each test
      *
      */
     public function setUp()
     {
-        parent::setUp(); // Don't forget this!
-
+        parent::setUp();
+        $this->userRepository = new UserRepository(new User());
         $this->prepareForTests();
+    }
+
+    /**
+     * @param array $options
+     * @return User
+     */
+    protected function createAndSaveUser( $options = [ ] )
+    {
+        $user = Factory::build('Blog\Users\User', $options);
+
+        return $this->userRepository->save($user);
     }
 
     public function testSaveUsers()
     {
-        $userRepository = new UserRepository(new User());
+        $user = $this->createAndSaveUser();
 
-        $user = Factory::build('Blog\Users\User');
+        $this->assertEquals($this->userRepository->all()[ 0 ]->id, $user->id);
+        $this->assertEquals(count($this->userRepository->all()), 1);
 
-        $user = $userRepository->save($user);
+        $this->createAndSaveUser();
 
-        $this->assertEquals($userRepository->all()[ 0 ]->id, $user->id);
-        $this->assertEquals(count($userRepository->all()), 1);
-
-        $user = Factory::build('Blog\Users\User');
-
-        $user = $userRepository->save($user);
-
-        $this->assertEquals(count($userRepository->all()), 2);
+        $this->assertEquals(count($this->userRepository->all()), 2);
 
     }
 
+    /**
+     * @expectedException Illuminate\Database\QueryException
+     */
     public function testErrorWhenStoringTwoUsersSameEmail()
     {
-        /**
-         * todo
-         */
+        $user = $this->createAndSaveUser([
+            'email' => 'example@example.com'
+        ]);
 
+        $this->assertEquals($this->userRepository->all()[ 0 ]->id, $user->id);
+        $this->assertEquals(count($this->userRepository->all()), 1);
+
+
+        $this->createAndSaveUser([
+            'email' => 'example@example.com'
+        ]);
+    }
+
+    public function testFindUsers()
+    {
+        $user = $this->createAndSaveUser();
+
+        $search = $this->userRepository->find($user->id);
+
+        $this->assertEquals($search->first_name, $user->first_name);
+        $this->assertEquals(count($this->userRepository->all()), 1);
+    }
+
+    /**
+     * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function testFindUsersNull()
+    {
+        $this->userRepository->find(1);
     }
 
     public function testSearchUsersByEmail()
     {
-        $userRepository = new UserRepository(new User());
+        $user = $this->createAndSaveUser();
 
-        $user = Factory::build('Blog\Users\User');
-
-        $user = $userRepository->save($user);
-
-        $this->assertEquals(count($userRepository->all()), 1);
-
-        $search = $userRepository->search($user->email);
+        $search = $this->userRepository->search($user->email);
 
         $this->assertEquals($search->id, $user->id);
     }
+
+    /**
+     * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function testSearchNullUsersByEmail()
+    {
+        $this->userRepository->search('example@email.com');
+    }
+
+    public function testDestroyUsers1()
+    {
+        $user = $this->createAndSaveUser();
+
+        $this->assertEquals(count($this->userRepository->all()), 1);
+
+        $this->userRepository->destroy($user);
+        $this->assertEquals(count($this->userRepository->all()), 0);
+
+        $this->createAndSaveUser();
+        $user = $this->createAndSaveUser();
+        $this->assertEquals(count($this->userRepository->all()), 2);
+
+        $this->userRepository->destroy($user);
+        $this->assertEquals(count($this->userRepository->all()), 1);
+
+    }
+
+    /**
+     * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function testDestroyUsers2()
+    {
+        $user = $this->createAndSaveUser();
+
+        $this->assertEquals(count($this->userRepository->all()), 1);
+        $this->assertEquals($user->fullName, $this->userRepository->find($user->id)->fullName);
+
+
+        $this->userRepository->destroy($user);
+        $this->assertEquals(count($this->userRepository->all()), 0);
+
+        $this->userRepository->find($user->id);
+
+    }
+
 
 }
