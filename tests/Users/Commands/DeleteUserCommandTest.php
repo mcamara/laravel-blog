@@ -42,19 +42,22 @@ class DeleteUserCommandTest extends TestCase {
 
     public function testEditUsers()
     {
-        foreach(range(0, 4) as $index)
+        foreach ( range(0, 4) as $index )
         {
-            $user = Factory::build('Blog\Users\User');
+            $user = Factory::build('Blog\Users\User', [
+                'id' => $index
+            ]);
 
             $this->dispatcher->shouldReceive('fire')->once();
             $this->createCommand->create($user->toArray());
         }
 
         $this->assertEquals(count($this->userRepository->all()), 5);
-        $this->assertTrue($this->command->delete($user->id));
+        $this->assertTrue($this->command->delete(2));
         $this->assertEquals(count($this->userRepository->all()), 4);
 
     }
+
     /**
      * @expectedException Blog\Users\Exceptions\CannotDeleteLastUser
      */
