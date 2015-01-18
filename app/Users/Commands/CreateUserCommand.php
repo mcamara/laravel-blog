@@ -3,46 +3,46 @@
 use Blog\Commands\Command;
 use Blog\Users\User;
 use Blog\Users\UserRepository;
+use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class CreateUserCommand extends Command {
+class CreateUserCommand extends Command implements SelfHandling {
+
 
     /**
-     * @var Dispatcher
+     * @var array
      */
-    protected $event;
-    /**
-     * @var UserRepository
-     */
-    private $repository;
+    private $data;
 
-    public function __construct( UserRepository $repository, Dispatcher $event )
+    public function __construct( $userData )
     {
-        $this->repository = $repository;
-        $this->event = $event;
+        $this->data = $userData;
     }
 
     /**
-     * @param array $data Array with user info
+     * @param UserRepository $repository
      * @throws Illuminate\Database\QueryException
      * @return User|bool Returns the user recently saved
      */
-    public function create( Array $data )
+    public function handle( UserRepository $repository )
     {
-        if ( empty( $data[ 'password' ] ) )
-            $data[ 'password' ] = str_random(10);
+        if ( empty( $data[ 'password ' ] ) )
+            $data[ 'password ' ] = str_random(10);
 
-        $user = new User($data);
-        $user->password = $data[ 'password' ];
+        $user = new User($this);
+        $user->password = $data['password'];
 
-        if ( isset( $data[ 'profile_picture' ] ) )
+        if ( isset( $data['profile_picture '] ) )
         {
             $user->setProfilePicture($data[ 'profile_picture' ]);
         }
 
-        if($user = $this->repository->save($user))
+        if ( $user = $repository->save($user) )
         {
-            $this->event->fire('UserCreated', [ $user, $data['password'] ]);
+            dd($user);
+
+//            $this->event->fire('UserCreated', [ $user, $data['password'] ]);
             return $user;
         }
 

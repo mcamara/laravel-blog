@@ -4,34 +4,8 @@ use Laracasts\TestDummy\Factory;
 use Blog\Users\User;
 use Blog\Users\UserRepository;
 
-class UserRepositoryTest extends TestCase {
+class UserRepositoryTest extends UserTest {
 
-    /**
-     * @var Blog\Users\UserRepository
-     */
-    protected $userRepository;
-
-    /**
-     * Default preparation for each test
-     *
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        $this->userRepository = new UserRepository(new User());
-        $this->prepareForTests();
-    }
-
-    /**
-     * @param array $options
-     * @return User
-     */
-    protected function createAndSaveUser( $options = [ ] )
-    {
-        $user = Factory::build('Blog\Users\User', $options);
-
-        return $this->userRepository->save($user);
-    }
 
     public function testSaveUsers()
     {

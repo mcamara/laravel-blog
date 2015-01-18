@@ -2,22 +2,15 @@
 
 use Blog\Users\Commands\DeleteUserCommand;
 use Blog\Users\User;
-use Blog\Users\UserRepository;
 use Blog\Users\Commands\CreateUserCommand;
 use Laracasts\TestDummy\Factory;
 
-class DeleteUserCommandTest extends TestCase {
-
+class DeleteUserCommandTest extends UserTest {
 
     /**
      * @var Mockery/MockInterface
      */
     protected $dispatcher;
-
-    /**
-     * @var UserRepository
-     */
-    protected $userRepository;
 
     /**
      * @var DeleteUserCommand
@@ -34,7 +27,6 @@ class DeleteUserCommandTest extends TestCase {
         parent::setUp();
         $this->prepareForTests();
         $this->dispatcher = $this->mock('Illuminate\Contracts\Events\Dispatcher');
-        $this->userRepository = new UserRepository(new User());
         $this->createCommand = new CreateUserCommand($this->userRepository, $this->dispatcher);
         $this->command = new DeleteUserCommand($this->userRepository);
     }
@@ -44,12 +36,9 @@ class DeleteUserCommandTest extends TestCase {
     {
         foreach ( range(0, 4) as $index )
         {
-            $user = Factory::build('Blog\Users\User', [
+            $this->createAndSaveUser([
                 'id' => $index
             ]);
-
-            $this->dispatcher->shouldReceive('fire')->once();
-            $this->createCommand->create($user->toArray());
         }
 
         $this->assertEquals(count($this->userRepository->all()), 5);
@@ -63,11 +52,7 @@ class DeleteUserCommandTest extends TestCase {
      */
     public function testExceptionWhenDeletingLastUserOfTheSystem()
     {
-        $user = Factory::build('Blog\Users\User');
-
-        $this->dispatcher->shouldReceive('fire')->once();
-        $user = $this->createCommand->create($user->toArray());
-
+        $user = $this->createAndSaveUser();
         $this->command->delete($user->id);
     }
 

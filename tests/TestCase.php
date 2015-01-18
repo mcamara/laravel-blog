@@ -19,7 +19,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	/**
 	 * Migrates the database and set the mailer to 'pretend'.
 	 * This will cause the tests to run quickly.
-	 *
 	 */
 	protected function prepareForTests()
 	{

@@ -3,7 +3,7 @@
 use Laracasts\TestDummy\Factory;
 
 
-class UserTest extends TestCase {
+class UserModelTest extends TestCase {
 
     public function testFullName()
     {

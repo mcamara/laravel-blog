@@ -26,6 +26,7 @@ class CreateUserRequest extends Request {
      */
     public function authorize()
     {
+        dd($this->user());
         // Admins are the only ones able to create new users
         return $this->user()->isAdmin();
     }
