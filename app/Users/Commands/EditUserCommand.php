@@ -3,6 +3,7 @@
 use Blog\Commands\Command;
 use Blog\Users\User;
 use Blog\Users\UserRepository;
+use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class EditUserCommand extends Command implements SelfHandling {
@@ -30,11 +31,12 @@ class EditUserCommand extends Command implements SelfHandling {
 
     /**
      * @param UserRepository $repository
+     * @param Dispatcher $event
      * @throws Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws Illuminate\Database\QueryException
      * @return User|bool
      */
-    public function edit( UserRepository $repository )
+    public function handle( UserRepository $repository, Dispatcher $event )
     {
         $user = $repository->find($this->user_id);
 
@@ -53,10 +55,9 @@ class EditUserCommand extends Command implements SelfHandling {
             $user->setProfilePicture($this->data[ 'profile_picture' ]);
         }
 
-
         if ( $user = $repository->save($user) )
         {
-            $this->event->fire('UserEdited', [ $user ]);
+            $event->fire('UserEdited', [ $user ]);
 
             return $user;
         }

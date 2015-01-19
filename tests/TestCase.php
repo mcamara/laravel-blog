@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
 	/**
@@ -20,8 +22,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 	 * Migrates the database and set the mailer to 'pretend'.
 	 * This will cause the tests to run quickly.
 	 */
-	protected function prepareForTests()
+	public function setUp()
 	{
+		parent::setUp();
 		Artisan::call('migrate');
 		Mail::pretend(true);
 	}
@@ -32,5 +35,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		$this->app->instance($class, $mock);
 		return $mock;
 	}
+
 
 }

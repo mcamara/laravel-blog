@@ -19,7 +19,6 @@ class UserTest extends TestCase {
     {
         parent::setUp();
         $this->userRepository = new UserRepository(new User());
-        $this->prepareForTests();
     }
 
     /**

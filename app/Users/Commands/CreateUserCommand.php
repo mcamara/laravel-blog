@@ -6,6 +6,7 @@ use Blog\Users\UserRepository;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Str;
 
 class CreateUserCommand extends Command implements SelfHandling {
 
@@ -30,17 +31,27 @@ class CreateUserCommand extends Command implements SelfHandling {
         if ( empty( $data[ 'password ' ] ) )
             $data[ 'password ' ] = str_random(10);
 
-        $user = new User($this);
-        $user->password = $data['password'];
+        $user = new User($this->data);
 
-        if ( isset( $data['profile_picture '] ) )
+        $randomPassword = false;
+
+        if ( !isset( $data[ 'password' ] ) )
+        {
+            $data[ 'password' ] = Str::random(10);
+            $randomPassword = true;
+        }
+
+        $user->password = $data[ 'password' ];
+
+        if ( isset( $data[ 'profile_picture ' ] ) )
         {
             $user->setProfilePicture($data[ 'profile_picture' ]);
         }
 
         if ( $user = $repository->save($user) )
         {
-            $event->fire('UserCreated', [ $user, $data['password'] ]);
+            $event->fire('UserCreated', [ $user, $randomPassword ? $data[ 'password' ] : false ]);
+
             return $user;
         }
 
