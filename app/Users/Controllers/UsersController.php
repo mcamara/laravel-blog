@@ -2,6 +2,7 @@
 
 use Blog\Users\Commands\CreateUserCommand;
 use Blog\Users\Requests\CreateUserRequest;
+use Blog\Users\UserRepository;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
