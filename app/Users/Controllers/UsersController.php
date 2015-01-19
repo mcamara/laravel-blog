@@ -1,6 +1,7 @@
 <?php namespace Blog\Users\Controllers;
 
-use Blog\Users\UserRepository;
+use Blog\Users\Commands\CreateUserCommand;
+use Blog\Users\Requests\CreateUserRequest;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -28,6 +29,7 @@ class UsersController extends BaseController {
     public function index()
     {
         $users = $this->repository->all();
+
         return view('users.index', [ 'users' => $users ]);
     }
 
@@ -38,17 +40,26 @@ class UsersController extends BaseController {
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param CreateUserRequest $request
      * @return Response
      */
-    public function store()
+    public function store( CreateUserRequest $request )
     {
-        //
+        $user = $this->dispatch(new CreateUserCommand($request->only([
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+            'is_admin'
+        ])));
+
+        return view('users.show', [ 'user' => $user ]);
     }
 
     /**
@@ -60,6 +71,7 @@ class UsersController extends BaseController {
     public function show( $id )
     {
         $user = $this->repository->find($id);
+
         return view('users.index', [ 'user' => $user ]);
     }
 

@@ -4,31 +4,32 @@ use Blog\Commands\Command;
 use Blog\Users\UserRepository;
 use Blog\Users\Exceptions\CannotDeleteLastUser;
 
-class DeleteUserCommand extends Command {
+class DeleteUserCommand extends Command implements SelfHandling {
+
 
     /**
-     * @var UserRepository
+     * @var integer
      */
-    private $repository;
+    private $user_id;
 
-    public function __construct( UserRepository $repository )
+    public function __construct( $user_id )
     {
-        $this->repository = $repository;
+        $this->user_id = $user_id;
     }
 
     /**
-     * @param $user_id
-     * @throws Blog\Users\Exceptions\CannotDeleteLastUser
+     * @param UserRepository $repository
      * @return bool
+     * @throws CannotDeleteLastUser
      */
-    public function delete( $user_id )
+    public function handle( UserRepository $repository )
     {
-        $user = $this->repository->find($user_id);
+        $user = $repository->find($this->user_id);
 
-        if(count($this->repository->all()) === 1)
+        if(count($repository->all()) === 1)
             throw new CannotDeleteLastUser;
 
-        return $this->repository->destroy($user);
+        return $repository->destroy($user);
     }
 
 }

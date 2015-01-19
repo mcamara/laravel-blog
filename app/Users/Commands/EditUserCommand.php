@@ -5,54 +5,59 @@ use Blog\Users\User;
 use Blog\Users\UserRepository;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class EditUserCommand extends Command {
+class EditUserCommand extends Command implements SelfHandling {
 
     /**
-     * @var Dispatcher
+     * @var Array
      */
-    protected $event;
+    private $data;
     /**
-     * @var UserRepository
+     * @var
      */
-    private $repository;
-
-    public function __construct( UserRepository $repository, Dispatcher $event )
-    {
-        $this->repository = $repository;
-        $this->event = $event;
-    }
+    private $user_id;
 
 
     /**
      * @param $user_id
-     * @param array $data
+     * @param $data
+     */
+    public function __construct( $user_id, $data )
+    {
+        $this->data = $data;
+        $this->user_id = $user_id;
+    }
+
+
+    /**
+     * @param UserRepository $repository
      * @throws Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws Illuminate\Database\QueryException
      * @return User|bool
      */
-    public function edit( $user_id, Array $data )
+    public function edit( UserRepository $repository )
     {
-        $user = $this->repository->find($user_id);
+        $user = $repository->find($this->user_id);
 
-        $user->first_name = $data[ 'first_name' ];
-        $user->last_name = $data[ 'last_name' ];
-        $user->email = $data[ 'email' ];
-        $user->is_admin = $data[ 'is_admin' ];
+        $user->first_name = $this->data[ 'first_name' ];
+        $user->last_name = $this->data[ 'last_name' ];
+        $user->email = $this->data[ 'email' ];
+        $user->is_admin = $this->data[ 'is_admin' ];
 
-        if ( isset( $data[ 'password' ] ) )
+        if ( isset( $this->data[ 'password' ] ) )
         {
-            $user->password = $data[ 'password' ];
+            $user->password = $this->data[ 'password' ];
         }
 
-        if ( isset( $data[ 'profile_picture' ] ) )
+        if ( isset( $this->data[ 'profile_picture' ] ) )
         {
-            $user->setProfilePicture( $data[ 'profile_picture' ] );
+            $user->setProfilePicture($this->data[ 'profile_picture' ]);
         }
 
 
-        if($user = $this->repository->save($user))
+        if ( $user = $repository->save($user) )
         {
             $this->event->fire('UserEdited', [ $user ]);
+
             return $user;
         }
 

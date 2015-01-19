@@ -5,10 +5,9 @@ use Blog\Users\User;
 use Blog\Users\UserRepository;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Database\QueryException;
 
 class CreateUserCommand extends Command implements SelfHandling {
-
 
     /**
      * @var array
@@ -22,10 +21,11 @@ class CreateUserCommand extends Command implements SelfHandling {
 
     /**
      * @param UserRepository $repository
-     * @throws Illuminate\Database\QueryException
+     * @param Dispatcher $event
+     * @throws QueryException
      * @return User|bool Returns the user recently saved
      */
-    public function handle( UserRepository $repository )
+    public function handle( UserRepository $repository, Dispatcher $event )
     {
         if ( empty( $data[ 'password ' ] ) )
             $data[ 'password ' ] = str_random(10);
@@ -40,9 +40,7 @@ class CreateUserCommand extends Command implements SelfHandling {
 
         if ( $user = $repository->save($user) )
         {
-            dd($user);
-
-//            $this->event->fire('UserCreated', [ $user, $data['password'] ]);
+            $event->fire('UserCreated', [ $user, $data['password'] ]);
             return $user;
         }
 
