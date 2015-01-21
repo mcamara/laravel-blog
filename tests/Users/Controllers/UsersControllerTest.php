@@ -1,38 +1,43 @@
 <?php
 
-use Users\Controllers\UsersController;
-use Users\Requests\CreateUserRequest;
-use Faker\Factory as Faker;
 
 class UsersControllerTest extends UserTest {
-
 
     public function setUp()
     {
         parent::setUp();
-        $this->userRepository = $this->mock('Users\UserRepository');
+        $this->auth = new Auth();
     }
 
-    public function testStoreUsersFunction()
+    public function testIndexWithoutLogin()
     {
-        $faker = Faker::create();
-        $request = CreateUserRequest::create('/', 'POST', [
-            'first_name' => $faker->firstName,
-            'last_name'  => $faker->lastName,
-            'email'      => $faker->email,
-            'password'   => $faker->password,
-            'is_admin'   => rand(0, 1)
+        $response = $this->action('GET', 'UsersController@index');
+        $this->assertRedirectedTo('/');
+        $this->assertTrue($response->isRedirection());
+    }
 
+    public function testIndexWithoutBeingAdminLogin()
+    {
+        $user = $this->createAndSaveUser([
+            'is_admin'  => 0
         ]);
 
-        $controller = new UsersController($this->userRepository);
+        Auth::loginUsingId($user->id);
+        $response = $this->action('GET', 'UsersController@index');
 
-        $this->userRepository
-            ->shouldReceive('save')
-            ->once();
+        $this->assertRedirectedTo('/');
+        $this->assertTrue($response->isRedirection());
+    }
 
-        Event::shouldReceive('fire')->once();
-        $controller->store($request);
+    public function testIndexBeingAdminLogin()
+    {
+        $user = $this->createAndSaveUser([
+            'is_admin'  => 1
+        ]);
+        Auth::loginUsingId($user->id);
+        $response = $this->action('GET', 'UsersController@index');
+
+        $this->assertResponseOk();
 
     }
 }

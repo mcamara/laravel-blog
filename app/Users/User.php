@@ -37,6 +37,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->first_name . " " . $this->last_name;
     }
 
+    /**
+     * Returns if this user is admin or not
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
+
     public function setPasswordAttribute( $password )
     {
         $hasher = new BcryptHasher();

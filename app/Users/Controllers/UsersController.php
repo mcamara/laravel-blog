@@ -19,6 +19,7 @@ class UsersController extends BaseController {
     function __construct( UserRepository $repository )
     {
         $this->repository = $repository;
+        $this->middleware('Users\Middleware\AdminAccess');
     }
 
 
