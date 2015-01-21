@@ -1,7 +1,7 @@
 <?php
 
 
-use Blog\Users\Commands\EditUserCommand;
+use Users\Commands\EditUserCommand;
 
 class EditUserCommandTest extends UserTest {
 

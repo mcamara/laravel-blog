@@ -19,7 +19,8 @@
 			"database"
 		],
 		"psr-4": {
-			"Blog\\": "app/"
+			"Blog\\": "app/",
+		  	"Users\\": "app/Users"
 		}
 	},
 	"autoload-dev": {

@@ -1,7 +1,7 @@
 <?php
 
-use Blog\Users\Controllers\UsersController;
-use Blog\Users\Requests\CreateUserRequest;
+use Users\Controllers\UsersController;
+use Users\Requests\CreateUserRequest;
 use Faker\Factory as Faker;
 
 class UsersControllerTest extends UserTest {
@@ -10,7 +10,7 @@ class UsersControllerTest extends UserTest {
     public function setUp()
     {
         parent::setUp();
-        $this->userRepository = $this->mock('Blog\Users\UserRepository');
+        $this->userRepository = $this->mock('Users\UserRepository');
     }
 
     public function testStoreUsersFunction()

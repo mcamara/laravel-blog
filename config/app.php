@@ -146,6 +146,13 @@ return [
 		'Blog\Providers\RouteServiceProvider',
 
 		'Illuminate\Html\HtmlServiceProvider',
+
+		/*
+		 * Users Service Providers...
+		 */
+
+		'Users\Providers\RouteServiceProvider',
+
 	],
 
 	/*

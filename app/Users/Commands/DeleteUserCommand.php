@@ -1,8 +1,8 @@
-<?php namespace Blog\Users\Commands;
+<?php namespace Users\Commands;
 
 use Blog\Commands\Command;
-use Blog\Users\UserRepository;
-use Blog\Users\Exceptions\CannotDeleteLastUser;
+use Users\UserRepository;
+use Users\Exceptions\CannotDeleteLastUser;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class DeleteUserCommand extends Command implements SelfHandling {

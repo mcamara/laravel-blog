@@ -1,7 +1,7 @@
 <?php
 
 
-use Blog\Users\Commands\DeleteUserCommand;
+use Users\Commands\DeleteUserCommand;
 
 class DeleteUserCommandTest extends UserTest {
 
@@ -35,7 +35,7 @@ class DeleteUserCommandTest extends UserTest {
     }
 
     /**
-     * @expectedException Blog\Users\Exceptions\CannotDeleteLastUser
+     * @expectedException Users\Exceptions\CannotDeleteLastUser
      */
     public function testExceptionWhenDeletingLastUserOfTheSystem()
     {

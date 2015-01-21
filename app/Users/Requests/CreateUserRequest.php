@@ -1,4 +1,4 @@
-<?php namespace Blog\Users\Requests;
+<?php namespace Users\Requests;
 
 use Blog\Http\Requests\Request;
 

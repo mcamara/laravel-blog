@@ -1,8 +1,8 @@
-<?php namespace Blog\Users\Controllers;
+<?php namespace Users\Controllers;
 
-use Blog\Users\Commands\CreateUserCommand;
-use Blog\Users\Requests\CreateUserRequest;
-use Blog\Users\UserRepository;
+use Users\Commands\CreateUserCommand;
+use Users\Requests\CreateUserRequest;
+use Users\UserRepository;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;

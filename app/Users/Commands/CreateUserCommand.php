@@ -1,8 +1,8 @@
-<?php namespace Blog\Users\Commands;
+<?php namespace Users\Commands;
 
 use Blog\Commands\Command;
-use Blog\Users\User;
-use Blog\Users\UserRepository;
+use Users\User;
+use Users\UserRepository;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\QueryException;

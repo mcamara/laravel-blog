@@ -1,6 +1,6 @@
 <?php
 
-use Blog\Users\Commands\CreateUserCommand;
+use Users\Commands\CreateUserCommand;
 use Laracasts\TestDummy\Factory;
 
 class CreateUserCommandTest extends UserTest {
@@ -16,7 +16,7 @@ class CreateUserCommandTest extends UserTest {
 
     public function testSaveUsers()
     {
-        $user = Factory::build('Blog\Users\User', [
+        $user = Factory::build('Users\User', [
             'first_name' => 'John',
             'last_name'  => 'Doe'
         ]);
@@ -29,7 +29,7 @@ class CreateUserCommandTest extends UserTest {
         $this->assertEquals($this->userRepository->all()[ 0 ]->fullName, "John Doe");
         $this->assertEquals(count($this->userRepository->all()), 1);
 
-        $user = Factory::build('Blog\Users\User');
+        $user = Factory::build('Users\User');
 
         $command = new CreateUserCommand($user->toArray());
 
@@ -40,7 +40,7 @@ class CreateUserCommandTest extends UserTest {
 
         foreach ( range(1, 10) as $index )
         {
-            $user = Factory::build('Blog\Users\User');
+            $user = Factory::build('Users\User');
             $command = new CreateUserCommand($user->toArray());
 
             $this->dispatcher->shouldReceive('fire')->once();
@@ -55,7 +55,7 @@ class CreateUserCommandTest extends UserTest {
      */
     public function testSaveWithErrorsUsers()
     {
-        $user = Factory::build('Blog\Users\User', [
+        $user = Factory::build('Users\User', [
             'first_name' => null,
         ]);
 
@@ -71,7 +71,7 @@ class CreateUserCommandTest extends UserTest {
      */
     public function testTryToStoreTwoUsersWithSameEmail()
     {
-        $user = Factory::build('Blog\Users\User', [
+        $user = Factory::build('Users\User', [
             'email' => 'john@example.com',
         ]);
 
@@ -80,7 +80,7 @@ class CreateUserCommandTest extends UserTest {
         $this->dispatcher->shouldReceive('fire')->once();
         $command->handle($this->userRepository, $this->dispatcher);
 
-        $user = Factory::build('Blog\Users\User', [
+        $user = Factory::build('Users\User', [
             'email' => 'john@example.com',
         ]);
 

@@ -1,6 +1,6 @@
 <?php
 
-$factory('Blog\Users\User', [
+$factory('Users\User', [
     'first_name' => $faker->firstName,
     'last_name'  => $faker->lastName,
     'email'      => $faker->email,

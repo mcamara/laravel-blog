@@ -1,4 +1,4 @@
-<?php namespace Blog\Users;
+<?php namespace Users;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

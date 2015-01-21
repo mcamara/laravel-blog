@@ -1,13 +1,13 @@
 <?php
 
-use Blog\Users\User;
-use Blog\Users\UserRepository;
+use Users\User;
+use Users\UserRepository;
 use Laracasts\TestDummy\Factory;
 
 class UserTest extends TestCase {
 
     /**
-     * @var Blog\Users\UserRepository
+     * @var Users\UserRepository
      */
     protected $userRepository;
 
@@ -27,14 +27,14 @@ class UserTest extends TestCase {
      */
     protected function createAndSaveUser( $options = [ ] )
     {
-        $user = Factory::build('Blog\Users\User', $options);
+        $user = Factory::build('Users\User', $options);
 
         return $this->userRepository->save($user);
     }
 
     public function testFullName()
     {
-        $user = Factory::build('Blog\Users\User', [
+        $user = Factory::build('Users\User', [
             'first_name' => 'John',
             'last_name'  => 'Doe'
         ]);

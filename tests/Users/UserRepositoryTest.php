@@ -1,8 +1,8 @@
 <?php
 
 use Laracasts\TestDummy\Factory;
-use Blog\Users\User;
-use Blog\Users\UserRepository;
+use Users\User;
+use Users\UserRepository;
 
 class UserRepositoryTest extends UserTest {
 

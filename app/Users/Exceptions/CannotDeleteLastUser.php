@@ -1,4 +1,4 @@
-<?php namespace Blog\Users\Exceptions;
+<?php namespace Users\Exceptions;
 
 use Exception;
 

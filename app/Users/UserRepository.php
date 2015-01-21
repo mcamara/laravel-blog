@@ -1,5 +1,5 @@
 <?php
-namespace Blog\Users;
+namespace Users;
 
 
 class UserRepository {
