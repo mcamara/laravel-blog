@@ -19,7 +19,7 @@ class UsersController extends BaseController {
     function __construct( UserRepository $repository )
     {
         $this->repository = $repository;
-        $this->middleware('Users\Middleware\AdminAccess');
+        $this->middleware('Users\Middleware\AdminAccess', [ 'except' => 'show' ]);
     }
 
 
@@ -31,7 +31,6 @@ class UsersController extends BaseController {
     public function index()
     {
         $users = $this->repository->all();
-
         return view('users.index', [ 'users' => $users ]);
     }
 

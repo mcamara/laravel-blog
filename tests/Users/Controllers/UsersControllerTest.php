@@ -1,6 +1,8 @@
 <?php
 
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class UsersControllerTest extends UserTest {
 
     public function setUp()
@@ -38,6 +40,21 @@ class UsersControllerTest extends UserTest {
         $response = $this->action('GET', 'UsersController@index');
 
         $this->assertResponseOk();
+    }
+
+    public function testShowUser()
+    {
+        $user = $this->createAndSaveUser();
+        $this->action('GET', 'UsersController@show', [ $user->id ]);
+        $this->assertResponseOk();
 
     }
+
+
+    public function testErrorShowingUnexistantUser()
+    {
+        $response = $this->action('GET', 'UsersController@show', [ 1000 ]);
+        $this->assertResponseStatus(500);
+    }
+
 }

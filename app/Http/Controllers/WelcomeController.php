@@ -30,7 +30,6 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		dd($this->dispacher);
 		return view('welcome');
 	}
 
