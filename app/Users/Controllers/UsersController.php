@@ -1,7 +1,12 @@
 <?php namespace Users\Controllers;
 
+use Exception;
 use Users\Commands\CreateUserCommand;
+use Users\Commands\DeleteUserCommand;
+use Users\Commands\EditUserCommand;
 use Users\Requests\CreateUserRequest;
+use Users\Requests\DeleteUserRequest;
+use Users\Requests\EditUserRequest;
 use Users\UserRepository;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
@@ -31,6 +36,7 @@ class UsersController extends BaseController {
     public function index()
     {
         $users = $this->repository->all();
+
         return view('users.index', [ 'users' => $users ]);
     }
 
@@ -52,15 +58,21 @@ class UsersController extends BaseController {
      */
     public function store( CreateUserRequest $request )
     {
-        $user = $this->dispatch(new CreateUserCommand($request->only([
-            'first_name',
-            'last_name',
-            'email',
-            'password',
-            'is_admin'
-        ])));
+        try
+        {
+            $user = $this->dispatch(new CreateUserCommand($request->only([
+                'first_name',
+                'last_name',
+                'email',
+                'password',
+                'is_admin'
+            ])));
 
-        return view('users.show', [ 'user' => $user ]);
+            return redirect()->action('UsersController@show' , [ $user->id ]);
+        }
+        catch(Exception $e) {
+            return app('redirect')->back()->withInput()->withErrors( $e->getMessage() );
+        }
     }
 
     /**
@@ -73,7 +85,7 @@ class UsersController extends BaseController {
     {
         $user = $this->repository->find($id);
 
-        return view('users.index', [ 'user' => $user ]);
+        return view('users.show', [ 'user' => $user ]);
     }
 
     /**
@@ -84,29 +96,55 @@ class UsersController extends BaseController {
      */
     public function edit( $id )
     {
-        //
+        $user = $this->repository->find($id);
+
+        return view('users.edit', [ 'user' => $user ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int $id
+     * @param EditUserRequest $request
      * @return Response
      */
-    public function update( $id )
+    public function update( $id, EditUserRequest $request )
     {
-        //
+        try
+        {
+            $user = $this->dispatch(new EditUserCommand($id , $request->only([
+                'first_name',
+                'last_name',
+                'email',
+                'password',
+                'is_admin'
+            ])));
+
+            return redirect()->action('UsersController@show' , [ $user->id ]);
+        }
+        catch(Exception $e) {
+            return app('redirect')->back()->withInput()->withErrors( $e->getMessage() );
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
+     * @param DeleteUserRequest $request
      * @return Response
      */
-    public function destroy( $id )
+    public function destroy( $id , DeleteUserRequest $request)
     {
-        //
+        try
+        {
+            $this->dispatch(new DeleteUserCommand($id));
+            return redirect()->action('UsersController@index');
+        }
+        catch(Exception $e) {
+            return app('redirect')->back()->withInput()->withErrors( $e->getMessage() );
+        }
     }
 
 }

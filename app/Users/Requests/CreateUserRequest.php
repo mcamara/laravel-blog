@@ -1,8 +1,8 @@
 <?php namespace Users\Requests;
 
-use Blog\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends Request {
+class CreateUserRequest extends FormRequest {
 
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +14,7 @@ class CreateUserRequest extends Request {
         return [
             'first_name' 		=> 'required|alpha',
             'last_name' 		=> 'required|alpha',
-            'email'				=> 'required|email',
+            'email'				=> 'required|email|unique:users,id',
             'profile_picture'	=> 'image'
         ];
     }
@@ -26,7 +26,6 @@ class CreateUserRequest extends Request {
      */
     public function authorize()
     {
-        dd($this->user());
         // Admins are the only ones able to create new users
         return $this->user()->isAdmin();
     }
