@@ -24,7 +24,8 @@ class UsersController extends BaseController {
     function __construct( UserRepository $repository )
     {
         $this->repository = $repository;
-        $this->middleware('Users\Middleware\AdminAccess', [ 'except' => 'show' ]);
+        $this->middleware('Users\Middleware\AdminAccess', [ 'except' => [ 'show', 'edit', 'update' ] ]);
+        $this->middleware('Users\Middleware\UserAccess', [ 'only' => [ 'edit', 'update' ] ]);
     }
 
 
@@ -68,10 +69,10 @@ class UsersController extends BaseController {
                 'is_admin'
             ])));
 
-            return redirect()->action('UsersController@show' , [ $user->id ]);
-        }
-        catch(Exception $e) {
-            return app('redirect')->back()->withInput()->withErrors( $e->getMessage() );
+            return redirect()->action('UsersController@show', [ $user->id ]);
+        } catch ( Exception $e )
+        {
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
     }
 
@@ -112,7 +113,7 @@ class UsersController extends BaseController {
     {
         try
         {
-            $user = $this->dispatch(new EditUserCommand($id , $request->only([
+            $user = $this->dispatch(new EditUserCommand($id, $request->only([
                 'first_name',
                 'last_name',
                 'email',
@@ -120,10 +121,10 @@ class UsersController extends BaseController {
                 'is_admin'
             ])));
 
-            return redirect()->action('UsersController@show' , [ $user->id ]);
-        }
-        catch(Exception $e) {
-            return app('redirect')->back()->withInput()->withErrors( $e->getMessage() );
+            return redirect()->action('UsersController@show', [ $user->id ]);
+        } catch ( Exception $e )
+        {
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
 
     }
@@ -135,15 +136,16 @@ class UsersController extends BaseController {
      * @param DeleteUserRequest $request
      * @return Response
      */
-    public function destroy( $id , DeleteUserRequest $request)
+    public function destroy( $id, DeleteUserRequest $request )
     {
         try
         {
             $this->dispatch(new DeleteUserCommand($id));
+
             return redirect()->action('UsersController@index');
-        }
-        catch(Exception $e) {
-            return app('redirect')->back()->withInput()->withErrors( $e->getMessage() );
+        } catch ( Exception $e )
+        {
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
     }
 

@@ -1,10 +1,12 @@
 <?php namespace Users\Middleware;
 
+
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Routing\Middleware;
+use \Illuminate\Routing\Route;
 
-class AdminAccess implements Middleware {
+class UserAccess implements Middleware {
 
     /**
      * The Guard implementation.
@@ -12,15 +14,20 @@ class AdminAccess implements Middleware {
      * @var Guard
      */
     protected $auth;
+    /**
+     * @var Router
+     */
+    private $router;
 
     /**
      * Create a new filter instance.
      *
      * @param  Guard $auth
      */
-    public function __construct( Guard $auth )
+    public function __construct( Guard $auth, Route $router )
     {
         $this->auth = $auth;
+        $this->router = $router;
     }
 
     /**
@@ -32,7 +39,12 @@ class AdminAccess implements Middleware {
      */
     public function handle( $request, Closure $next )
     {
-        if ( $this->auth->guest() || !$this->auth->user()->isAdmin() )
+        // Same id as the route or admin
+        if ( $this->auth->guest() ||
+            (
+                !$this->auth->user()->isAdmin() && $this->router->parameter('users') != $this->auth->user()->id
+            )
+        )
         {
             if ( $request->ajax() )
             {
@@ -45,7 +57,3 @@ class AdminAccess implements Middleware {
         return $next($request);
     }
 }
-
-
-
-
