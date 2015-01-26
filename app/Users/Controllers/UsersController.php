@@ -32,7 +32,7 @@ class UsersController extends BaseController {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -44,7 +44,7 @@ class UsersController extends BaseController {
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -55,7 +55,7 @@ class UsersController extends BaseController {
      * Store a newly created resource in storage.
      *
      * @param CreateUserRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store( CreateUserRequest $request )
     {
@@ -80,7 +80,7 @@ class UsersController extends BaseController {
      * Display the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show( $id )
     {
@@ -93,7 +93,7 @@ class UsersController extends BaseController {
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function edit( $id )
     {
@@ -107,12 +107,13 @@ class UsersController extends BaseController {
      *
      * @param  int $id
      * @param EditUserRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update( $id, EditUserRequest $request )
     {
         try
         {
+
             $user = $this->dispatch(new EditUserCommand($id, $request->only([
                 'first_name',
                 'last_name',
@@ -134,7 +135,7 @@ class UsersController extends BaseController {
      *
      * @param  int $id
      * @param DeleteUserRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy( $id, DeleteUserRequest $request )
     {
@@ -143,6 +144,7 @@ class UsersController extends BaseController {
             $this->dispatch(new DeleteUserCommand($id));
 
             return redirect()->action('UsersController@index');
+
         } catch ( Exception $e )
         {
             return redirect()->back()->withInput()->withErrors($e->getMessage());

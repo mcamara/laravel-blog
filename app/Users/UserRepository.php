@@ -35,10 +35,10 @@ class UserRepository {
     }
 
     /**
-     * @param string $email
+     * @param string|false $email
      * @return User
      */
-    public function search( $email = false )
+    public function search( $email )
     {
         return $this->user->where('email', $email)->firstOrFail();
 

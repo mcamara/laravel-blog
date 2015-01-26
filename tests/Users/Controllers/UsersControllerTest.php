@@ -20,6 +20,19 @@ class UsersControllerTest extends UserTest {
         return $user;
     }
 
+    /**
+     * @return \Users\User
+     */
+    public function createAndLoginNonAdminUser()
+    {
+        $user = $this->createAndSaveUser([
+            'is_admin' => 0
+        ]);
+        Auth::loginUsingId($user->id);
+
+        return $user;
+    }
+
     public function testIndexWithoutLogin()
     {
         $response = $this->action('GET', 'UsersController@index');
@@ -29,11 +42,8 @@ class UsersControllerTest extends UserTest {
 
     public function testIndexWithoutBeingAdminLogin()
     {
-        $user = $this->createAndSaveUser([
-            'is_admin' => 0
-        ]);
+        $this->createAndLoginNonAdminUser();
 
-        Auth::loginUsingId($user->id);
         $response = $this->action('GET', 'UsersController@index');
 
         $this->assertRedirectedTo('/');
@@ -74,11 +84,7 @@ class UsersControllerTest extends UserTest {
 
     public function testCreateUserWithoutBeingAdmin()
     {
-        $user = $this->createAndSaveUser([
-            'is_admin' => 0
-        ]);
-
-        Auth::loginUsingId($user->id);
+        $this->createAndLoginNonAdminUser();
         $response = $this->action('GET', 'UsersController@create');
 
         $this->assertRedirectedTo('/');
@@ -105,7 +111,6 @@ class UsersControllerTest extends UserTest {
             'email'      => 'email@example.com',
             'password'   => $faker->password,
             'is_admin'   => rand(0, 1),
-            "_token"     => csrf_token()
         ]);
 
         $userCreated = $this->userRepository->search('email@example.com');
@@ -120,10 +125,7 @@ class UsersControllerTest extends UserTest {
 
     public function testSavingWithoutBeingAdmin()
     {
-        $user = $this->createAndSaveUser([
-            'is_admin' => 0
-        ]);
-        Auth::loginUsingId($user->id);
+        $this->createAndLoginNonAdminUser();
 
         $faker = Faker\Factory::create();
 
@@ -178,10 +180,7 @@ class UsersControllerTest extends UserTest {
 
     public function testEditFormUserWithoutBeingAdminButBeingTheSameUser()
     {
-        $user = $this->createAndSaveUser([
-            'is_admin' => 0
-        ]);
-        Auth::loginUsingId($user->id);
+        $user = $this->createAndLoginNonAdminUser();
 
         $response = $this->action('GET', 'UsersController@edit', [ $user->id ]);
 
@@ -215,27 +214,108 @@ class UsersControllerTest extends UserTest {
 
     public function testUpdateUserBeingAdmin()
     {
-
         $user = $this->createAndSaveUser();
 
         $this->createAndLoginAdmin();
 
         $faker = Faker\Factory::create();
 
-        $this->action('UPDATE', 'UsersController@update', [ $user->id ], [
-            'first_name' => $user->firstName,
-            'last_name'  => $user->lastName,
+        $this->action('PUT', 'UsersController@update', [ $user->id ], [
+            'first_name' => 'John',
+            'last_name'  => 'Connor',
             'email'      => 'one@example.com',
             'password'   => $faker->password,
             'is_admin'   => rand(0, 1),
-            "_token"     => csrf_token()
         ]);
 
         $userUpdated = $this->userRepository->search('one@example.com');
 
         $this->assertEquals($userUpdated->email, 'one@example.com');
-        $this->assertRedirectedToAction('UsersController@show', $userUpdated->id);
+        $this->assertEquals($userUpdated->fullName, 'John Connor');
 
+        $this->assertRedirectedToAction('UsersController@show', $userUpdated->id);
     }
+
+    public function testUpdateUserWithoutBeingAdminButBeingTheSameUser()
+    {
+        $user = $this->createAndLoginNonAdminUser();
+
+        $faker = Faker\Factory::create();
+
+        $this->action('PUT', 'UsersController@update', [ $user->id ], [
+            'first_name' => 'John',
+            'last_name'  => 'Connor',
+            'email'      => 'one@example.com',
+            'password'   => $faker->password,
+            'is_admin'   => rand(0, 1),
+        ]);
+
+        $userUpdated = $this->userRepository->search('one@example.com');
+
+        $this->assertEquals($userUpdated->email, 'one@example.com');
+        $this->assertEquals($userUpdated->fullName, 'John Connor');
+
+        $this->assertRedirectedToAction('UsersController@show', $userUpdated->id);
+    }
+
+    /**
+     * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function testUpdateUserWithoutBeingAdminAndADifferentUser()
+    {
+        $user = $this->createAndSaveUser();
+
+        $this->createAndLoginNonAdminUser();
+
+        $faker = Faker\Factory::create();
+
+        $this->action('PUT', 'UsersController@update', [ $user->id ], [
+            'first_name' => 'John',
+            'last_name'  => 'Connor',
+            'email'      => 'one@example.com',
+            'password'   => $faker->password,
+            'is_admin'   => rand(0, 1),
+        ]);
+
+        $this->assertRedirectedTo("/");
+
+        // should raise a ModelNotFoundException
+        $this->userRepository->search('one@example.com');
+    }
+
+    public function testDeleteUserBeingAdmin()
+    {
+        $user = $this->createAndSaveUser();
+        $this->createAndLoginAdmin();
+
+        $this->action('DELETE', 'UsersController@destroy', [ $user->id ]);
+
+        $this->assertRedirectedToAction('UsersController@index');
+        $this->assertEquals(count($this->userRepository->all()), 1);
+    }
+
+    public function testDeleteUserWithoutBeingAdminButBeingTheSameUser()
+    {
+        // An user cannot delete himself
+        $user = $this->createAndLoginNonAdminUser();
+
+        $this->action('DELETE', 'UsersController@destroy', [ $user->id ]);
+
+        $this->assertRedirectedTo('/');
+        $this->assertEquals(count($this->userRepository->all()), 1);
+    }
+
+    public function testDeleteUserWithoutBeingAdminAndADifferentUser()
+    {
+        $user = $this->createAndSaveUser();
+
+        $this->createAndLoginNonAdminUser();
+
+        $this->action('DELETE', 'UsersController@destroy', [ $user->id ]);
+
+        $this->assertRedirectedTo('/');
+        $this->assertEquals(count($this->userRepository->all()), 2);
+    }
+
 
 }

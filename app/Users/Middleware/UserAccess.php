@@ -23,6 +23,7 @@ class UserAccess implements Middleware {
      * Create a new filter instance.
      *
      * @param  Guard $auth
+     * @param Route $router
      */
     public function __construct( Guard $auth, Route $router )
     {
