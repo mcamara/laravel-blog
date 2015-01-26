@@ -152,6 +152,7 @@ return [
 		 */
 
 		'Users\Providers\RouteServiceProvider',
+		'Posts\Providers\RouteServiceProvider',
 
 	],
 

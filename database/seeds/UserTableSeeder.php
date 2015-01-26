@@ -6,7 +6,6 @@ use Users\UserRepository;
 
 class UserTableSeeder extends Seeder {
 
-
     /**
      * @var UserRepository
      */

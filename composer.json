@@ -20,7 +20,8 @@
 		],
 		"psr-4": {
 			"Blog\\": "app/",
-		  	"Users\\": "app/Users"
+			"Users\\": "app/Users",
+			"Posts\\": "app/Posts"
 		}
 	},
 	"autoload-dev": {
