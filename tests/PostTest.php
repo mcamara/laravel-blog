@@ -46,7 +46,7 @@ class PostTest extends TestCase {
      * @param array $options
      * @return Post
      */
-    protected function createAndSavePost( $user_id = false, $options = [ ] )
+    protected function createAndSavePost( $options = [ ] , $user_id = false )
     {
         if ( !$user_id )
         {
@@ -58,7 +58,18 @@ class PostTest extends TestCase {
 
         $post = Factory::build('Posts\Post', $options);
 
-        return $this->userRepository->save($post);
+        return $this->postRepository->save($post);
+    }
+
+    public function testSlug()
+    {
+        $post = $this->createAndSavePost([
+            'title_en'  => 'test english'
+        ]);
+
+        $this->assertEquals($post->slug, 'test-english');
+
+
     }
 
 }

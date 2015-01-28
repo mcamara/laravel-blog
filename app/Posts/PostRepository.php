@@ -1,7 +1,4 @@
-<?php
-
-
-namespace Posts;
+<?php namespace Posts;
 
 
 class PostRepository {

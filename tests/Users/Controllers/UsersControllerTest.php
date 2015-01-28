@@ -111,6 +111,7 @@ class UsersControllerTest extends UserTest {
             'email'      => 'email@example.com',
             'password'   => $faker->password,
             'is_admin'   => rand(0, 1),
+            "_token"     => csrf_token()
         ]);
 
         $userCreated = $this->userRepository->search('email@example.com');
@@ -226,6 +227,7 @@ class UsersControllerTest extends UserTest {
             'email'      => 'one@example.com',
             'password'   => $faker->password,
             'is_admin'   => rand(0, 1),
+            "_token"     => csrf_token()
         ]);
 
         $userUpdated = $this->userRepository->search('one@example.com');
@@ -248,6 +250,7 @@ class UsersControllerTest extends UserTest {
             'email'      => 'one@example.com',
             'password'   => $faker->password,
             'is_admin'   => rand(0, 1),
+            "_token"     => csrf_token()
         ]);
 
         $userUpdated = $this->userRepository->search('one@example.com');
@@ -275,6 +278,7 @@ class UsersControllerTest extends UserTest {
             'email'      => 'one@example.com',
             'password'   => $faker->password,
             'is_admin'   => rand(0, 1),
+            "_token"     => csrf_token()
         ]);
 
         $this->assertRedirectedTo("/");
@@ -296,7 +300,6 @@ class UsersControllerTest extends UserTest {
 
     public function testDeleteUserWithoutBeingAdminButBeingTheSameUser()
     {
-        // An user cannot delete himself
         $user = $this->createAndLoginNonAdminUser();
 
         $this->action('DELETE', 'UsersController@destroy', [ $user->id ]);
@@ -313,7 +316,7 @@ class UsersControllerTest extends UserTest {
 
         $this->action('DELETE', 'UsersController@destroy', [ $user->id ]);
 
-        $this->assertRedirectedTo('/');
+        $this->assertRedirectedTo('');
         $this->assertEquals(count($this->userRepository->all()), 2);
     }
 

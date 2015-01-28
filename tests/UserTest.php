@@ -13,7 +13,6 @@ class UserTest extends TestCase {
 
     /**
      * Default preparation for each test
-     *
      */
     public function setUp()
     {

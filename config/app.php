@@ -148,11 +148,11 @@ return [
 		'Illuminate\Html\HtmlServiceProvider',
 
 		/*
-		 * Users Service Providers...
+		 * Custom Service Providers...
 		 */
 
 		'Users\Providers\RouteServiceProvider',
-		'Posts\Providers\RouteServiceProvider',
+//		'Posts\Providers\RouteServiceProvider',
 
 	],
 
@@ -197,6 +197,7 @@ return [
 		'Route'     => 'Illuminate\Support\Facades\Route',
 		'Schema'    => 'Illuminate\Support\Facades\Schema',
 		'Session'   => 'Illuminate\Support\Facades\Session',
+		'Storage'   => 'Illuminate\Support\Facades\Storage',
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
